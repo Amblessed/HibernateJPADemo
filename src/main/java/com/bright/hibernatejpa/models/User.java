@@ -12,10 +12,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -36,4 +34,11 @@ public class User {
      * In this case, User table would have another field called location_id. */
     @ManyToOne
     private Location location;
+
+    /* The mappedBy is an attribute of the @OneToMany relationship. You use the mappedBy to tell the @OneToMany
+     * attribute that the relationship has already been handled using a foreign key in the corresponding entity. In
+     * this way, an additional table is not created
+     */
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 }
