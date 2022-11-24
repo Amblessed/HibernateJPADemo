@@ -14,6 +14,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,6 +28,11 @@ public class Post {
     private Long id;
     private String details;
     private LocalDateTime postDate;
+
+    /* This means many users can have one location. The *many* is the class and the *one* is the field. The class
+     * should handle the relationship. Wherever we put this annotation, it is that entity that would handle the mapping.
+     * In this case, User table would have another field called location_id. */
+    @ManyToOne
     private User user;
 
 
