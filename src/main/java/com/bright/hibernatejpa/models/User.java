@@ -15,12 +15,14 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "users") //A table with name user cannot be created hence *user*
 public class User {
 
     @Id
