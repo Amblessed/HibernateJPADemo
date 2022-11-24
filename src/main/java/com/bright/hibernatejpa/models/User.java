@@ -31,8 +31,15 @@ public class User {
 
     /* This means many users can have one location. The *many* is the class and the *one* is the field. The class
      * should handle the relationship. Wherever we put this annotation, it is that entity that would handle the mapping.
-     * In this case, User table would have another field called location_id. */
+     * In this case, User table would have another field called location_id.
+     * @JoinColumn annotation is used to specify the actual column (in the table) used for the mapping. This is done at
+     * the entity that owns the mapping
+     *
+     * In User-Post: The Post owns the relationship and automatically creates the user_id column. This is the join
+     * column.
+     *  */
     @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
     /* The mappedBy is an attribute of the @OneToMany relationship. You use the mappedBy to tell the @OneToMany
