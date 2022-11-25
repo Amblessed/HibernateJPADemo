@@ -36,7 +36,12 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}/post")
-    public List<Post> getUsersByLocation(@PathVariable Long id){
+    public List<Post> getPostsByUser(@PathVariable Long id){
         return userService.getUserById(id).map(User::getPosts).orElseThrow(null);
+    }
+
+    @GetMapping("/users/location/{id}/users")
+    public List<User> getUsersByLocation(@PathVariable Long id){
+        return userService.getUsersByLocation(id);
     }
 }
