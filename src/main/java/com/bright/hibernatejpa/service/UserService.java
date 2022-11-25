@@ -30,4 +30,8 @@ public class UserService {
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
+
+    public List<User> getUsersByLocation(Long id) {
+        return userRepository.findByLocationId(id);
+    }
 }
