@@ -7,6 +7,7 @@ package com.bright.hibernatejpa.controller;
  */
 
 
+import com.bright.hibernatejpa.models.Post;
 import com.bright.hibernatejpa.models.User;
 import com.bright.hibernatejpa.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,11 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable Long id){
-        return userService.getUserById(id);
+        return userService.getUserById(id).orElse(null);
+    }
+
+    @GetMapping("/users/{id}/post")
+    public List<Post> getUsersByLocation(@PathVariable Long id){
+        return userService.getUserById(id).map(User::getPosts).orElseThrow(null);
     }
 }

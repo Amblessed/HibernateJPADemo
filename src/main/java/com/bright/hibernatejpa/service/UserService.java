@@ -12,6 +12,7 @@ import com.bright.hibernatejpa.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -26,7 +27,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(id + " does not exist"));
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 }
