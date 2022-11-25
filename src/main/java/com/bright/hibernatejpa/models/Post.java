@@ -37,8 +37,11 @@ public class Post {
      * should handle the relationship. Wherever we put this annotation, it is that entity that would handle the mapping.
      * In this case, Post table would have another field called user_id. */
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    //@JoinColumn(name = "user_id")
+    @JoinColumn(name = "userid", insertable = false, updatable = false)
     private User user;
+
+    private Long userid;
 
     /* To break infinite recursion loop, the @JsonManagedReference is used on the OneToMany side while the
      * @JsonBackReference is used at the @ManyToOne side. @JsonManagedReference is the forward part of the
