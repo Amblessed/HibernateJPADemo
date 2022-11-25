@@ -7,6 +7,9 @@ package com.bright.hibernatejpa.models;
  */
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,10 +23,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "users") //A table with name user cannot be created hence *user*
+@Table(name = "users") //A table with name user cannot be created hence *users*
 public class User {
 
     @Id
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)  //This would remove the id field in the json response
     private Long id;
     private String firstName;
     private String lastName;
@@ -48,4 +52,20 @@ public class User {
      */
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
+
+    /* To break infinite recursion loop, the @JsonManagedReference is used on the OneToMany side while the
+    * @JsonBackReference is used at the @ManyToOne side. @JsonManagedReference is the forward part of the
+    * mapping/reference and the data gets serialized normally. @JsonBackReference is the backward side of the
+    * mapping and the data does not get serialized. They are added on the getter methods.
+    * */
+
+    @JsonManagedReference
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    @JsonBackReference
+    public Location getLocation() {
+        return location;
+    }
 }
