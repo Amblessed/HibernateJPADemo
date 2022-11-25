@@ -43,8 +43,12 @@ public class User {
      * column.
      *  */
     @ManyToOne
-    @JoinColumn(name = "location_id")
+    //@JoinColumn(name = "location_id")
+    @JoinColumn(name = "locationid", insertable = false, updatable = false)
     private Location location;
+
+    /*In order to be able to use this field in postgres, run UPDATE users SET locationid = location_id; */
+    private Long locationid;
 
     /* The mappedBy is an attribute of the @OneToMany relationship. You use the mappedBy to tell the @OneToMany
      * attribute that the relationship has already been handled using a foreign key in the corresponding entity. In
@@ -58,6 +62,7 @@ public class User {
     * mapping/reference and the data gets serialized normally. @JsonBackReference is the backward side of the
     * mapping and the data does not get serialized. They are added on the getter methods.
     * */
+
 
     @JsonManagedReference
     public List<Post> getPosts() {
