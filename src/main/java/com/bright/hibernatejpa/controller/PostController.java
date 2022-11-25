@@ -34,4 +34,11 @@ public class PostController {
         return postService.getPostById(id);
     }
 
+    @GetMapping("/posts/user/{id}/posts")
+    public List<Post> getPostsByUser(@PathVariable Long id) {
+        return postService.getPostsByUser(id);
+    }
+
+
+
 }
