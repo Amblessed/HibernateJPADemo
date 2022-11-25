@@ -43,6 +43,8 @@ public class PostController {
         postService.addPost(post);
     }
 
-
-
+    @PutMapping("/posts/{id}/update")
+    public void updatePost(@RequestBody Post post) {
+        postService.updatePost(post);
+    }
 }
