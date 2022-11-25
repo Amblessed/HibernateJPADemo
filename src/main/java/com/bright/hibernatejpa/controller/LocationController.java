@@ -8,6 +8,7 @@ package com.bright.hibernatejpa.controller;
 
 
 import com.bright.hibernatejpa.models.Location;
+import com.bright.hibernatejpa.models.User;
 import com.bright.hibernatejpa.service.LocationService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,12 @@ public class LocationController {
     @GetMapping("/locations/{id}")
     public Optional<Location> getLocationById(@PathVariable Long id) {
         return locationService.getLocationById(id);
+    }
+
+    @GetMapping("/location/{id}/users")
+    public List<User> getUsersByLocation(@PathVariable Long id){
+        Optional<Location> location = locationService.getLocationById(id);
+        return location.map(Location::getUsers).orElse(null);
     }
 
 }
