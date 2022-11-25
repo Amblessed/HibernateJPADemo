@@ -34,7 +34,7 @@ public class LocationController {
         return locationService.getLocationById(id);
     }
 
-    @GetMapping("/location/{id}/users")
+    @GetMapping("/locations/{id}/users")
     public List<User> getUsersByLocation(@PathVariable Long id){
         Optional<Location> location = locationService.getLocationById(id);
         return location.map(Location::getUsers).orElse(null);
@@ -43,6 +43,11 @@ public class LocationController {
     @PostMapping("/locations/addNew")
     public void addLocation(@RequestBody Location location) {
         locationService.addLocation(location);
+    }
+
+    @PutMapping("/locations/{id}/update")
+    public void updateLocation(@RequestBody Location location) {
+        locationService.updateLocation(location);
     }
 
 }
