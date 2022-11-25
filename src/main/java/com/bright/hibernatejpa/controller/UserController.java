@@ -10,9 +10,7 @@ package com.bright.hibernatejpa.controller;
 import com.bright.hibernatejpa.models.Post;
 import com.bright.hibernatejpa.models.User;
 import com.bright.hibernatejpa.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,5 +41,10 @@ public class UserController {
     @GetMapping("/users/location/{id}/users")
     public List<User> getUsersByLocation(@PathVariable Long id){
         return userService.getUsersByLocation(id);
+    }
+
+    @PostMapping("/users/addNew")
+    public void addUser(@RequestBody User user) {
+        userService.addUser(user);
     }
 }
