@@ -47,14 +47,22 @@ public class User {
     @JoinColumn(name = "locationid", insertable = false, updatable = false)
     private Location location;
 
-    /*In order to be able to use this field in postgres, run UPDATE users SET locationid = location_id; */
+    /*In order to be able to use this field in postgres,
+     * run UPDATE users SET locationid = location_id */
     private Long locationid;
 
     /* The mappedBy is an attribute of the @OneToMany relationship. You use the mappedBy to tell the @OneToMany
      * attribute that the relationship has already been handled using a foreign key in the corresponding entity. In
      * this way, an additional table is not created
+     * The CascadeType answers the question of what will happen when you delete an object has children reference objects.
+     * Now a number of things could happen
+     * CascadeType.REMOVE: All the child entities are deleted (all post for the user is deleted)
+     * CascadeType.ALL: In this case, the operation is propagated from the parent to all the child entities
+     * CasCadeType.MERGE: It propagates merge operation from the parent to the child entities
+     * CascadeType.PERSIST: Here, the transient instance is made persistent
+     * CascadeType.DETACH: This cascade type removes that entity from the persistent context.
      */
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
 
     /* To break infinite recursion loop, the @JsonManagedReference is used on the OneToMany side while the
