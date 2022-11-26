@@ -37,4 +37,8 @@ public class LocationService {
     public void updateLocation(Location location) {
         locationRepository.save(location);
     }
+
+    public void deleteLocation(Long id) {
+        locationRepository.deleteById(id);
+    }
 }

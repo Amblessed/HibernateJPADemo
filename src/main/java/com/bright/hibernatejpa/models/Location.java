@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -34,7 +35,7 @@ public class Location {
      * attribute that the relationship has already been handled using a foreign key in the corresponding entity. In
      * this way, an additional table is not created
      */
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<User> users;  //This means list of all the users under the location
 
 
